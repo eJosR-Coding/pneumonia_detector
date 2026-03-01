@@ -99,12 +99,15 @@ def predict(image_bytes: bytes) -> dict:
     heatmap    = _gradcam(model, img)
     heatmap_b64 = _overlay_heatmap(heatmap, img)
 
+    confidence = round(max(probability, 1 - probability), 4)
+
     return {
-        "diagnosis":    diagnosis,
-        "probability":  round(probability, 4),
-        "confidence":   round(max(probability, 1 - probability), 4),
-        "threshold":    THRESHOLD,
-        "heatmap":      heatmap_b64,
+        "diagnosis":          diagnosis,
+        "probability":        round(probability, 4),
+        "confidence":         confidence,
+        "confidence_warning": confidence < 0.65,
+        "threshold":          THRESHOLD,
+        "heatmap":            heatmap_b64,
         "model_metrics": {
             "auc_roc":     0.9649,
             "sensitivity": 0.9513,
