@@ -1,0 +1,205 @@
+.gradcam-section h3 {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.gradcam-section h3 .icon {
+    color: var(--primary);
+}
+
+.gradcam-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+    .gradcam-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ── Image frame ───────────────────────────────────────── */
+.gradcam-frame {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.gradcam-frame-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 0.75rem;
+    height: 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 5;
+}
+
+.gradcam-frame.original .gradcam-frame-bar {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+}
+
+.gradcam-frame.heatmap .gradcam-frame-bar {
+    background: rgba(0, 240, 255, 0.08);
+    border-color: rgba(0, 240, 255, 0.15);
+    backdrop-filter: blur(8px);
+}
+
+.frame-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.gradcam-frame.heatmap .frame-dot {
+    background: var(--primary);
+}
+
+.gradcam-frame-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.gradcam-frame.heatmap .gradcam-frame-label {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.gradcam-frame-status {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    color: rgba(0, 240, 255, 0.5);
+}
+
+.gradcam-img-wrap {
+    position: relative;
+    background: #000;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gradcam-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-height: 420px;
+}
+
+.gradcam-frame.original {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gradcam-frame.original img {
+    filter: contrast(1.15) grayscale(1);
+    opacity: 0.85;
+    transition: opacity 0.4s;
+}
+
+.gradcam-frame.original:hover img {
+    opacity: 1;
+}
+
+.gradcam-frame.heatmap {
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.05);
+}
+
+/* Corner brackets on original */
+.gradcam-img-wrap .corner {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: rgba(0, 240, 255, 0.5);
+    border-style: solid;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.corner.tl {
+    top: 4px;
+    left: 4px;
+    border-width: 2px 0 0 2px;
+}
+
+.corner.tr {
+    top: 4px;
+    right: 4px;
+    border-width: 2px 2px 0 0;
+}
+
+.corner.bl {
+    bottom: 4px;
+    left: 4px;
+    border-width: 0 0 2px 2px;
+}
+
+.corner.br {
+    bottom: 4px;
+    right: 4px;
+    border-width: 0 2px 2px 0;
+}
+
+/* Scan line on heatmap */
+.scan-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: rgba(0, 240, 255, 0.5);
+    box-shadow: 0 0 4px rgba(0, 240, 255, 0.8);
+    left: 0;
+    z-index: 3;
+    opacity: 0.5;
+    animation: scan 3s ease-in-out infinite;
+}
+
+/* Color scale bar */
+.gradcam-scale {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+}
+
+.gradcam-scale-label {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.gradcam-scale-label.low {
+    color: rgba(0, 240, 255, 0.6);
+}
+
+.gradcam-scale-label.high {
+    color: var(--secondary);
+}
+
+.gradcam-scale-bar {
+    flex: 1;
+    height: 5px;
+    margin: 0 0.75rem;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #1e3a8a, #7c3aed, #ec4899, #ef4444);
+    box-shadow: 0 0 8px rgba(255, 0, 80, 0.3);
+}
