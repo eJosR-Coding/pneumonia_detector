@@ -1,0 +1,247 @@
+.diagnosis-card {
+    border-radius: 8px;
+    padding: 2px;
+    overflow: hidden;
+}
+
+.diagnosis-card-inner {
+    background: var(--card-inner);
+    border-radius: 6px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.diagnosis-card-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+
+/* ── Primary diagnosis card ────────────────────────────── */
+.diagnosis-primary .diagnosis-card-inner {
+    position: relative;
+}
+
+.diagnosis-primary .bg-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    opacity: 0.08;
+    transition: opacity 0.3s;
+}
+
+.diagnosis-primary:hover .bg-icon {
+    opacity: 0.2;
+}
+
+.diagnosis-primary .bg-icon .icon {
+    font-size: 80px;
+}
+
+.diagnosis-label {
+    font-size: 1.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.diagnosis-label.pneumonia {
+    color: var(--secondary);
+    filter: drop-shadow(0 0 8px rgba(255, 0, 80, 0.5));
+}
+
+.diagnosis-label.normal {
+    color: var(--success);
+    filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.5));
+}
+
+.diagnosis-label .icon {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.diagnosis-sublabel {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 0.35rem;
+}
+
+.diagnosis-card-footer {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* ── Confidence card ───────────────────────────────────── */
+.confidence-value {
+    font-family: var(--font-mono);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+}
+
+.confidence-value .unit {
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+.confidence-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+.confidence-tag.high {
+    background: rgba(0, 240, 255, 0.1);
+    color: var(--primary);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+}
+
+.confidence-tag.low {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warn);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.confidence-bar {
+    height: 6px;
+    width: 100%;
+    background: rgba(100, 116, 139, 0.2);
+    border-radius: 0;
+    overflow: hidden;
+    margin-top: 1rem;
+    position: relative;
+}
+
+.confidence-bar-fill {
+    height: 100%;
+    transition: width 0.8s ease;
+    box-shadow: 0 0 10px var(--primary);
+}
+
+.confidence-bar-fill.pneumonia {
+    background: linear-gradient(90deg, var(--secondary), #ff6600);
+}
+
+.confidence-bar-fill.normal {
+    background: linear-gradient(90deg, var(--success), var(--primary));
+}
+
+.confidence-bar-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: rgba(0, 240, 255, 0.6);
+    text-align: right;
+    margin-top: 0.3rem;
+    text-transform: uppercase;
+}
+
+/* ── Low confidence warning ────────────────────────────── */
+.confidence-warning {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-radius: var(--radius);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--warn);
+}
+
+.confidence-warning .icon {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+/* ── Results grid ──────────────────────────────────────── */
+.result-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .result-cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ── Metric rows ───────────────────────────────────────── */
+.metrics-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+}
+
+.metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    position: relative;
+}
+
+.metric-row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background: rgba(100, 116, 139, 0.15);
+    z-index: 0;
+}
+
+.metric-row-label {
+    color: var(--text-muted);
+    background: var(--card-inner);
+    padding-right: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.metric-row-value {
+    color: var(--primary);
+    font-weight: 700;
+    background: var(--card-inner);
+    padding-left: 0.5rem;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+}
