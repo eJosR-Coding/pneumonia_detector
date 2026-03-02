@@ -1,0 +1,2 @@
+{"timestamp": "2026-03-01T23:54:20Z", "ip": "127.0.0.1", "filename": "gr3.jpg", "content_type": "image/jpeg", "diagnosis": "PNEUMONIA", "probability": 0.6387, "confidence_warning": true}
+{"timestamp": "2026-03-02T00:13:01Z", "ip": "127.0.0.1", "filename": "gr3.jpg", "content_type": "image/jpeg", "diagnosis": "PNEUMONIA", "probability": 0.6387, "confidence_warning": true}
